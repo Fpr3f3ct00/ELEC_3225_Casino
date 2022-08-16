@@ -1,29 +1,76 @@
 import random
+import sqlite3
 
-def virtual_poker(bet):
-    num = random.random()
-    if (num < 0.000025):
-        bet *= 800
-    elif (num < 0.000109):
-        bet *= 50
-    elif (num < 0.002363):
-        bet *= 25
-    elif (num < 0.011512):
-        bet *= 9
-    elif (num < 0.011015):
-        bet *= 6
-    elif (num < 0.011229):
-        bet *= 4
-    elif (num < 0.074449):
-        bet *= 3
-    elif (num < 0.129279):
-        bet *= 2
-    elif (num < 0.214585):
-        bet *= 1
-    else:
-        bet *= 0
-    return bet
+def main():
+    create_connection('Casino.db')
+    virtual_poker()
+
+def virtual_poker():
+    people = ['Bobbie Solis', 'Steve Lutz', 'Joanna Fritz', 'Brittany Yates', 'Sherry Wilson', 'Jeanne Snow', 'Lorna Pearson', 'Daryl Spencer', 'Sonya Dunham', 'Dick Muller', 'Roy Rogers', 'Neil Paine', 'Marisa Beard', 'Trisha Tompkins', 'Herbert Stout', 'Rosie Eastman', 'Shirley King', 'Julius Montgomery', 'Jennifer Jacobs', 'Marshall Woodward', 'Don Conner', 'Faye Leblanc', 'Alejandro Hale']
+    games = 0
+    money = 100
+    rounds = random.randint(1,100)
+    for x in range(1, rounds):
+        earnings = 0
+        player = random.choice(people)
+        print(player)
+        games = games + 1
+        bet = random.randint(1,10)
+        print("You bet $", bet)
+
+        num = random.random()
+        if (num < 0.000025):
+            earnings = bet * 800
+        elif (num < 0.000109):
+            earnings = bet * 50
+        elif (num < 0.002363):
+            earnings = bet * 25
+        elif (num < 0.011512):
+            earnings = bet * 9
+        elif (num < 0.011015):
+            earnings = bet * 6
+        elif (num < 0.011229):
+            earnings = bet * 4
+        elif (num < 0.074449):
+            earnings = bet * 3
+        elif (num < 0.129279):
+            earnings = bet * 2
+        elif (num < 0.214585):
+            earnings = bet * 1
+        else:
+            earnings = -bet
+        money = money + earnings
+        update(conn, player, earnings)
+        
+    x += 1
+    conn.commit()
+
     
+
+def create_connection(db_file):
+    conn = None
+    try:
+        conn = sqlite3.connect(db_file)
+    except Error as e:
+        print(e)
+
+    return conn
+
+def update(conn, name, money):
+    cur = conn.cursor()
+    cheat = random.randint(1,1000)
+#    cur.execute("UPDATE ROULETTE SET GAMES = 0")
+    cur.execute("UPDATE POKER SET GAMES = GAMES + 1 WHERE NAME = '{}'".format(name))
+    cur.execute("UPDATE POKER SET GAINS = GAINS + '{}' WHERE NAME = '{}'".format(money, name))
+    if cheat == 1:
+            cur.execute("UPDATE POKER SET CHEATING = CHEATING + 1 WHERE NAME = '{}'".format(name))
+    conn.commit()
+conn = create_connection('Casino.db')
+cur = conn.cursor()
+#cur.execute("UPDATE ROULETTE SET GAINS = 100 WHERE NAME = 'Bobbie Solis' ")
+
+main()
+
 # import numpy as np
 # from collections import Counter
 # from itertools import combinations
