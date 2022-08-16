@@ -154,7 +154,7 @@ Select an option:
                 pass
             self._game.bet(person_i, hands.get(hand_input.lower()), amount_input)
             print()
-        except (ValueError, TypeError, GameError) as error:
+        except (ValueError, TypeError, NameError) as error:
             print()
             print(error)
             self.bet(person_i)
