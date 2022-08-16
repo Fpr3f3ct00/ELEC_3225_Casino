@@ -64,25 +64,25 @@ Select an option:
 0: Quit''')
             #print()
             selection = '3'
-                #print()
+            print('three')
+            if selection in self._options:
+                self._options[selection]()
+            
+            selection = '4'
+            print('four')
             if selection in self._options:
                 self._options[selection]()
             
             for i in range(0, 99):
                 
-                selection = '4'
-                #print()
-                if selection in self._options:
-                    self._options[selection]()
-                
                 selection = '5'
-                #print()
+                print('five')
                 if selection in self._options:
                     self._options[selection]()
                 
                 i += 1
             selection = '0'
-                #print()
+            print('zero')
             if selection in self._options:
                 self._options[selection]()
 

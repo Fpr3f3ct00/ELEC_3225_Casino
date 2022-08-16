@@ -22,7 +22,7 @@ Pick an option:
             casino_roulette.roulette()
             poker.virtual_poker()
             BlackJack.blackjack()
-            baccarat.main()
+            #baccarat.main()
     elif (choice == '2'):
         conn = sqlite3.connect('Casino.db')
         cur = conn.cursor()
