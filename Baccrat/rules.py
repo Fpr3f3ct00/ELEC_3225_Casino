@@ -1,4 +1,4 @@
-from Card import Card, Shoe
+from cards import Card, Shoe
 from hands import Player, Banker
 from persons import Person
 

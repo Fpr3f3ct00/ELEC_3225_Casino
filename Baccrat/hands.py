@@ -1,4 +1,4 @@
-from Card import Card
+from cards import Card
 
 class Hand:
     """A hand of cards to be played. Either from the banker or the player.
