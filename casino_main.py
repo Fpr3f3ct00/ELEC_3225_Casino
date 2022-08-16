@@ -1,4 +1,9 @@
 import random
+import slots
+import casino_roulette
+import poker
+import BlackJack
+import baccarat
 
 print("Welcome to Casino Simulator")
 choice = 1
@@ -13,9 +18,14 @@ while (choice != '0'):
     if (choice == '1'):
         num_days = input("How many days would you like to simulate?: ")
         for i in num_days:
-            num_players = random.randint(1, 100)    #number of players that show up to casino on a day
-            for i in num_players:
-                game_choice = random.randint(1, 4)  #game choice one player decides to play
-                if (game_choice == 1):
+            slots.slots()
+            casino_roulette.roulette()
+            poker.virtual_poker()
+            BlackJack.blackjack()
+            baccarat.main()
+
+
+
+            
                     
 

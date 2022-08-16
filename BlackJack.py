@@ -470,11 +470,9 @@ class Table:
         if self.shoe.needShuffle():
             self.shoe.shuffle()
 
-def main():
-    create_connection('Casino.db')
-    blackjack()
 
 def blackjack():
+    create_connection('Casino.db')
     people = ['Bobbie Solis', 'Steve Lutz', 'Joanna Fritz', 'Brittany Yates', 'Sherry Wilson', 'Jeanne Snow', 'Lorna Pearson', 'Daryl Spencer', 'Sonya Dunham', 'Dick Muller', 'Roy Rogers', 'Neil Paine', 'Marisa Beard', 'Trisha Tompkins', 'Herbert Stout', 'Rosie Eastman', 'Shirley King', 'Julius Montgomery', 'Jennifer Jacobs', 'Marshall Woodward', 'Don Conner', 'Faye Leblanc', 'Alejandro Hale']
     games = 0
     money = 100
@@ -533,7 +531,6 @@ conn = create_connection('Casino.db')
 cur = conn.cursor()
 #cur.execute("UPDATE ROULETTE SET GAINS = 100 WHERE NAME = 'Bobbie Solis' ")
 
-main()
 
 # for i in range(0, 1000):        # Simulates 1,000 rounds of BlackJack
 #     table.playRound()
