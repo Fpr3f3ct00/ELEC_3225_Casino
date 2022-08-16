@@ -11,10 +11,10 @@ def virtual_poker():
     for x in range(1, rounds):
         earnings = 0
         player = random.choice(people)
-        print(player)
+        #print(player)
         games = games + 1
         bet = random.randint(1,10)
-        print("You bet $", bet)
+        #print("You bet $", bet)
 
         num = random.random()
         if (num < 0.000025):

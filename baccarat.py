@@ -19,7 +19,6 @@ def create_connection(db_file):
 
 conn = create_connection('Casino.db')
 cur = conn.cursor()
-
 people = ['Bobbie Solis', 'Steve Lutz', 'Joanna Fritz', 'Brittany Yates', 'Sherry Wilson', 'Jeanne Snow', 'Lorna Pearson', 'Daryl Spencer', 'Sonya Dunham', 'Dick Muller', 'Roy Rogers', 'Neil Paine', 'Marisa Beard', 'Trisha Tompkins', 'Herbert Stout', 'Rosie Eastman', 'Shirley King', 'Julius Montgomery', 'Jennifer Jacobs', 'Marshall Woodward', 'Don Conner', 'Faye Leblanc', 'Alejandro Hale']
 
 def update(conn, name, money):
@@ -42,7 +41,6 @@ class Baccarat:
         self._game = Table()
         self._quit = False
         self._options = {
-            '1': self.status,
             '2': self.create_shoe,
             '3': self.add_person,
             '4': self.place_bets,
@@ -52,53 +50,31 @@ class Baccarat:
 
     def run(self):
         """Main menu of the game."""
-        print('------------Baccarat---------------')
+        #print('------------Baccarat---------------')
         while not self._quit:
-            print('''
-Select an option:
-1: See Status
-2: Change shoe
-3: Add new person
-4: Place bets
-5: Deal cards
-0: Quit''')
-            print()
+
             selection = '3'
                 #print()
             if selection in self._options:
                 self._options[selection]()
-            else:
-                print('Selection not recognized.')
+
             for i in range(0, 99):
                 
                 selection = '4'
                 #print()
                 if selection in self._options:
                     self._options[selection]()
-                else:
-                    print('Selection not recognized.')
+
                 selection = '5'
                 #print()
                 if selection in self._options:
                     self._options[selection]()
-                else:
-                    print('Selection not recognized.')
-                i += 1
-            selection = '0'
-                #print()
-            if selection in self._options:
-                self._options[selection]()
-            else:
-                print('Selection not recognized.')
 
-    def status(self):
-        print(f'No of decks in shoe : {self._game.num_decks}')
-        if self._game.available_persons:
-            print(f'No of persons in game: {len(self._game.available_persons)} ')
-            for person in self._game.available_persons:
-                print(self._game[person])
-        else:
-            print('No persons.')
+                i += 1
+                selection = '0'
+                    #print()
+                if selection in self._options:
+                    self._options[selection]()
         
     def add_person(self):
         for i in range(0,8):
@@ -113,9 +89,9 @@ Select an option:
                 except:
                     pass
                 self._game.add_person(balance_input)
-                print()
+
             except (ValueError, TypeError) as error:
-                print()
+
                 print(error)
                 self.add_person()
             i += 1
@@ -127,9 +103,7 @@ Select an option:
         if self._game.available_persons:
             for person_i in self._game.available_persons:
                 self.bet(person_i)
-            print('All bets placed.')
-        else:
-            print('No persons to place bets.')
+            #print('All bets placed.')
 
     def bet(self, person_i):
         """Places an individual bet for person_i."""
@@ -142,16 +116,14 @@ Select an option:
             'tie': 'tie'
             }
         action = 'Replacing' if person_i in self._game.valid_bets else 'New'
-        print(f'{action} bet for Person {person_i + 1}. Press <s> to skip.')
+        #print(f'{action} bet for Person {person_i + 1}. Press <s> to skip.')
         inputs1 = ['s', 'p', 'b', 't']
         hand_input = random.choice(inputs1)
         #hand_input = input('The hand to bet. <p> player, <b> banker, <t> tie: ')
         if hand_input.lower() in ['s', 'skip']:
-            print()
             return
         amount_input = random.randint(1, 11)
         if amount_input == 11:
-            print()
             return
         try:
             # Try to convert to int but don't capture error
@@ -160,9 +132,7 @@ Select an option:
             except:
                 pass
             self._game.bet(person_i, hands.get(hand_input.lower()), amount_input)
-            print()
-        except (ValueError, TypeError, GameError) as error:
-            print()
+        except (ValueError, TypeError, NameError) as error:
             print(error)
             self.bet(person_i)
 
@@ -180,7 +150,6 @@ Select an option:
                 return self._game.game_result().title()
 
         def print_hands():
-            print()
             #print('Showing Player hand')
             #print(f'Player hand   {self._game.player_cards}')
             player_values = ', '.join([str(value) for value in self._game.player_values])
@@ -198,25 +167,25 @@ Select an option:
         #print('Dealing hands...')
         #time.sleep(1)
         self._game.deal_hands()
-        print_hands()
+        #print_hands()
         #print()
         if self._game.is_natural():
-            #time.sleep(0.5)
-            print(f'{result_str()}. Natural.')
+            time.sleep(0)
+            #print(f'{result_str()}. Natural.')
         else:
             #print('Drawing third cards...')
             #time.sleep(1)
             third_draws = self._game.draw_thirds()
-            for third_draw in third_draws:
-                print(f'{third_draw[0].title()} draw third card, {third_draw[1]}.')
+            #for third_draw in third_draws:
+                #print(f'{third_draw[0].title()} draw third card, {third_draw[1]}.')
                 #time.sleep(0.5)
             #print()
-            print_hands()
+            #print_hands()
             #time.sleep(0.5)
-            print(f'{result_str()}.')
+            #print(f'{result_str()}.')
         #print()
         #print()
-        print('Checking bets...')
+        #print('Checking bets...')
         #time.sleep(1)
         if self._game.valid_bets:
             for person_i in self._game.valid_bets:
@@ -229,11 +198,10 @@ Select an option:
                 update(conn, player, (bet_result-100))
                 
                 #time.sleep(0.5)
-        else:
-            print('No bets no table.')
-        if self._game.open_bets():
-            print('Bets are open.')
-        print()
+        #else:
+            #print('No bets no table.')
+        #if self._game.open_bets():
+            #print('Bets are open.')
 
     def create_shoe(self):
         """Creates a new shoe. Replaces the previous one."""
@@ -247,14 +215,10 @@ Select an option:
             except:
                 pass
             self._game.create_shoe(shoe_input)
-            print()
-            print(f'A new shoe with {int(shoe_input)} deck(s) will be used on the game.')
+            #print(f'A new shoe with {int(shoe_input)} deck(s) will be used on the game.')
         except (ValueError, TypeError) as error:
-            print()
             print(error)
             self.create_shoe()
 
     def quit(self):
         self._quit = True
-
-main()

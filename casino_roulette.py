@@ -54,7 +54,7 @@ def roulette():
     
     for x in range(1, rounds):
         player = random.choice(people)
-        print(player)
+        #print(player)
         
         games = games + 1
         bet = random.randint(1,10)
@@ -64,7 +64,7 @@ def roulette():
         #total = int(total)
         #if total<=bet:
         #    break
-        print("You bet $", bet)
+        #print("You bet $", bet)
         money = money - bet
         choice = random.choice(roulette_choice)
         if choice == green:
@@ -97,19 +97,19 @@ def roulette():
         elif choice == col3:
             choice_name = "Column 3"
             money_mult = 2
-        print("You chose", choice_name)
+        #print("You chose", choice_name)
         spin = random.randint(0,36)
-        print("The wheel landed on ", spin)
+        #print("The wheel landed on ", spin)
         if spin in choice:
-            print("You won!")
+            #print("You won!")
             earnings = (money_mult*bet)
-            print("Your payout is $", earnings)
+            #print("Your payout is $", earnings)
             money = money + earnings
             update(conn, player, earnings)
         else:
-            print("You lost")
+            #print("You lost")
             losses = -abs(bet)
-            print("Amount lost: $", bet)
+            #print("Amount lost: $", bet)
             update(conn, player, losses)
             money = money + losses
         x += 1
