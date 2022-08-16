@@ -1,5 +1,5 @@
 import time
-from rules import Table
+from rules import GameError, Table
 import random
 import math
 from itertools import product
@@ -249,5 +249,3 @@ Select an option:
 
     def quit(self):
         self._quit = True
-
-main()
