@@ -1,5 +1,4 @@
 import random
-from slots import *
 
 print("Welcome to Casino Simulator")
 choice = 1
@@ -18,5 +17,5 @@ while (choice != '0'):
             for i in num_players:
                 game_choice = random.randint(1, 4)  #game choice one player decides to play
                 if (game_choice == 1):
-                    print(slots(100))
+                    
 
