@@ -511,7 +511,11 @@ def blackjack():
     x += 1
     conn.commit()
         
+<<<<<<< HEAD
 
+=======
+#test
+>>>>>>> dom
 
 def create_connection(db_file):
     conn = None
