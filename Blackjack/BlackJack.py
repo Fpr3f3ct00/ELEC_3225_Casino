@@ -1,5 +1,6 @@
 import random
 from enum import Enum, auto
+import sqlite3
 
 class PlayOptions(Enum):
     STAY = 1
@@ -469,15 +470,72 @@ class Table:
         if self.shoe.needShuffle():
             self.shoe.shuffle()
 
+def main():
+    create_connection('Casino.db')
+    blackjack()
 
 def blackjack():
-    table = Table()
-    table.players.append(Player())
-    print("Dealer FaceCard, Player Card 1, Card 2, Total, Soft Hand, Is BlackJack, Busted, Action, Result, Value")
-    table.playRound()
-    return(table.printShortResults().split(","))
+    people = ['Bobbie Solis', 'Steve Lutz', 'Joanna Fritz', 'Brittany Yates', 'Sherry Wilson', 'Jeanne Snow', 'Lorna Pearson', 'Daryl Spencer', 'Sonya Dunham', 'Dick Muller', 'Roy Rogers', 'Neil Paine', 'Marisa Beard', 'Trisha Tompkins', 'Herbert Stout', 'Rosie Eastman', 'Shirley King', 'Julius Montgomery', 'Jennifer Jacobs', 'Marshall Woodward', 'Don Conner', 'Faye Leblanc', 'Alejandro Hale']
+    games = 0
+    money = 100
+    rounds = random.randint(1,100)
 
-print(blackjack())
+    for x in range(1, rounds):
+        earnings = 0
+        player = random.choice(people)
+        print(player)
+        games = games + 1
+        bet = random.randint(1,10)
+        print("You bet $", bet)
+        table = Table()
+        table.players.append(Player())
+        table.playRound()
+        result = table.printShortResults().split(",")
+        if (result[9] == ' -1.0'):
+            earnings = -bet
+        elif (result[9] == ' 1.0'):
+            earnings = bet
+        elif (result[9] == ' 1.2'):
+            earnings =1.2 * bet
+        elif (result[9] == ' 2.0'):
+            earnings =2 * bet
+        elif (result[9] == ' -2.0'):
+            earnings = -2 * bet
+        elif (result[9] == ' 0'):
+            earnings = 0
+        elif (result[9] == ' -0.5'):
+            earnings = -0.5 * bet
+        money = money + earnings
+        update(conn, player, earnings)
+        
+    x += 1
+    conn.commit()
+        
+
+
+def create_connection(db_file):
+    conn = None
+    try:
+        conn = sqlite3.connect(db_file)
+    except Error as e:
+        print(e)
+
+    return conn
+
+def update(conn, name, money):
+    cur = conn.cursor()
+    cheat = random.randint(1,1000)
+#    cur.execute("UPDATE ROULETTE SET GAMES = 0")
+    cur.execute("UPDATE BLACKJACK SET GAMES = GAMES + 1 WHERE NAME = '{}'".format(name))
+    cur.execute("UPDATE BLACKJACK SET GAINS = GAINS + '{}' WHERE NAME = '{}'".format(money, name))
+    if cheat == 1:
+            cur.execute("UPDATE BLACKJACK SET CHEATING = CHEATING + 1 WHERE NAME = '{}'".format(name))
+    conn.commit()
+conn = create_connection('Casino.db')
+cur = conn.cursor()
+#cur.execute("UPDATE ROULETTE SET GAINS = 100 WHERE NAME = 'Bobbie Solis' ")
+
+main()
 
 # for i in range(0, 1000):        # Simulates 1,000 rounds of BlackJack
 #     table.playRound()
