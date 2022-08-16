@@ -19,6 +19,7 @@ def create_connection(db_file):
 
 conn = create_connection('Casino.db')
 cur = conn.cursor()
+
 people = ['Bobbie Solis', 'Steve Lutz', 'Joanna Fritz', 'Brittany Yates', 'Sherry Wilson', 'Jeanne Snow', 'Lorna Pearson', 'Daryl Spencer', 'Sonya Dunham', 'Dick Muller', 'Roy Rogers', 'Neil Paine', 'Marisa Beard', 'Trisha Tompkins', 'Herbert Stout', 'Rosie Eastman', 'Shirley King', 'Julius Montgomery', 'Jennifer Jacobs', 'Marshall Woodward', 'Don Conner', 'Faye Leblanc', 'Alejandro Hale']
 
 def update(conn, name, money):
@@ -83,6 +84,12 @@ Select an option:
                 else:
                     print('Selection not recognized.')
                 i += 1
+            selection = '0'
+                #print()
+            if selection in self._options:
+                self._options[selection]()
+            else:
+                print('Selection not recognized.')
 
     def status(self):
         print(f'No of decks in shoe : {self._game.num_decks}')
@@ -154,7 +161,7 @@ Select an option:
                 pass
             self._game.bet(person_i, hands.get(hand_input.lower()), amount_input)
             print()
-        except (ValueError, TypeError, NameError) as error:
+        except (ValueError, TypeError, GameError) as error:
             print()
             print(error)
             self.bet(person_i)
@@ -249,3 +256,5 @@ Select an option:
 
     def quit(self):
         self._quit = True
+
+main()
