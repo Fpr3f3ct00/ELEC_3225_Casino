@@ -1,0 +1,75 @@
+import random
+from tracemalloc import stop
+
+class Wallet():
+    def __init__(self, money, wins):
+        self.money = money
+        self.wins = wins
+
+    def showmoney(self):
+        return self.money
+
+    def showwins(self):
+        return self.wins
+
+    def addmoney(self):
+        self.money = self.money + 2
+
+    def addwins(self):
+        self.wins = self.wins + 1
+        
+    def submoney(self):
+        self.money = self.money - 1
+
+def pachinko(balls):
+    i = 0
+    while (i < balls):
+        player.submoney()
+        i = i + 1
+        if (random.randrange(1, 100, 1) > 93):
+            player.addmoney()
+            player.addwins()
+
+plink = 0
+while (plink <= 1):
+    print ('Welcome to Pachinko')
+    print ('Each ball is worth $1')
+    print ('Every ball that lands in the outside pockets will return two balls to the players wallet')
+    print ('Balls can be redeemed for cash at any time')
+    cash = int(input('Please enter starting money: '))
+    player = Wallet(cash, 0)
+    print ('Wallet: ', player.showmoney(), ' balls')
+    print ('')
+    while (cash != 0) :
+        print ('     o     ')
+        print ('   o   o   ')
+        print ('  o  o  o  ')
+        print (' o o o o o ')
+        print ('o o o o o o')
+        print ('')
+        play = int(input('How many balls will you drop? '))
+
+        pachinko(play)
+
+        print ('Total wins = ', player.showwins())
+        print ('New wallet total is: ', player.showmoney(), ' balls')
+        print ('')
+        con = 0
+        while (con <= 1) :
+            print ('Keep playing? ')
+            cont = input('y/n')
+            if (cont == 'n') :
+                quit()
+            elif (cont == 'y') :
+                break
+            else :
+                con = 0
+    print ('Out of money, play again?')
+    contin = input('y/n')
+    while (cum <= 1) :
+        if (contin == 'y'):
+            break
+        elif (contin == 'n'):
+            quit()
+        else:
+            cum = 0
